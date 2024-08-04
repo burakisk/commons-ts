@@ -31,6 +31,13 @@ jobs:
       - name: Run tests
         run: npm test
 
+      - name: Upload Jest coverage report
+        if: success() && steps.test.outcome == 'success'
+        uses: actions/upload-artifact@v3
+        with:
+          name: jest-coverage-report
+          path: coverage
+
       #- name: Run my action
       #  uses: ./
       #  with:
