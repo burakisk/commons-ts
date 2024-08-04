@@ -17,6 +17,9 @@
   "author": "Burak I",
   "license": "ISC",
   "description": "Common functions to enhance developer productivity and efficiency.",
+  "prettier": {
+    "printWidth": 120
+  },
   "dependencies": {
     "typescript": "^5.5.4",
     "ts-node": "^10.9.2"
