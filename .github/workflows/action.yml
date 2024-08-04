@@ -38,13 +38,6 @@ jobs:
           name: jest-coverage-report
           path: coverage
 
-      #- name: Run my action
-      #  uses: ./
-      #  with:
-      #    name: "This commons_ts"
-      #    ghToken: ${{ secrets.COMMONS_TS }}
-
-jobs:
   pull-request:
     runs-on: ubuntu-latest
     steps:
