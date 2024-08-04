@@ -2,10 +2,10 @@ name: CI/CD for commons-ts
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
+      - feature-1
+
+permissions:
+  pull-requests: write
 
 jobs:
   run-action:
@@ -43,3 +43,13 @@ jobs:
       #  with:
       #    name: "This commons_ts"
       #    ghToken: ${{ secrets.COMMONS_TS }}
+
+jobs:
+  pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: pull-request
+        run: |
+          gh_pr_up() { gh pr create $* || gh pr edit $* }
+          gh_pr_up --title "My pull request" --body "Description"
