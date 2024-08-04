@@ -35,3 +35,6 @@ package-lock.json
 
 # Yarn lock file (optional, uncomment if you use Yarn)
 # yarn.lock
+
+# jest code coverage
+coverage/
