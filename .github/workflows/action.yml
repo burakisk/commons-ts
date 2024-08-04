@@ -28,8 +28,8 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Run my action
-        uses: ./
-        with:
-          name: "This commons_ts"
-          ghToken: ${{ secrets.COMMONS_TS }}
+      #- name: Run my action
+      #  uses: ./
+      #  with:
+      #    name: "This commons_ts"
+      #    ghToken: ${{ secrets.COMMONS_TS }}
