@@ -2,50 +2,89 @@ export function packageName(): string {
   return "commons-ts";
 }
 
+/**
+ * Checks if the specified value is empty. A value is considered empty if meets any of the following criteria:
+ * - Is an empty string
+ * - Is ```undefined``` || ```null```
+ * @param str The value to check
+ * @returns true/false
+ */
 export function isNullOrEmpty(str: string | null | undefined): boolean {
   return str === null || str === undefined || str.trim() === "";
 }
 
+/**
+ * Reverse given string.
+ * @param str The value to reverse
+ * @returns string
+ */
 export function reverseString(str: string): string {
   return str.split("").reverse().join("");
 }
 
+/**
+ * Checks if the specified value contains only letter.
+ * @param str The value to check
+ * @returns true/false
+ */
 export function isAlpha(str: string): boolean {
   return /^[A-Za-z]+$/.test(str);
 }
 
+/**
+ * Checks if the specified value contains only number.
+ * @param str The value to check
+ * @returns true/false
+ */
 export function isNumeric(str: string): boolean {
   return /^[0-9]+$/.test(str);
 }
 
+/**
+ * Checks if the specified value contains only whitespace.
+ * @param str The value to check
+ * @returns true/false
+ */
 export function isWhitespace(str: string): boolean {
   return /^\s*$/.test(str);
 }
 
-export function rotateStringLeft(s: string, n: number): string {
-  if (s.length === 0) {
-    return s;
+/**
+ * Shift given string to left by given rotation if given rotation is valid.
+ * @param str The value to check
+ * @param n The rotation count
+ * @returns string
+ */
+export function rotateStringLeft(str: string, n: number): string {
+  if (str.length === 0) {
+    return str;
   }
 
   if (n < 0) {
     throw new Error("Invalid input: n must be a possitive number");
   }
 
-  n = n % s.length; // Normalize rotation to be within the string length
+  n = n % str.length; // Normalize rotation to be within the string length
 
-  return s.slice(n) + s.slice(0, n);
+  return str.slice(n) + str.slice(0, n);
 }
 
-export function rotateStringRight(s: string, n: number): string {
-  if (s.length === 0) {
-    return s;
+/**
+ * Shift given string to right by given rotation if given rotation is valid.
+ * @param str The value to check
+ * @param n The rotation count
+ * @returns string
+ */
+export function rotateStringRight(str: string, n: number): string {
+  if (str.length === 0) {
+    return str;
   }
 
   if (n < 0) {
     throw new Error("Invalid input: n must be a possitive number");
   }
 
-  n = n % s.length; // Normalize rotation to be within the string length
+  n = n % str.length; // Normalize rotation to be within the string length
 
-  return s.slice(-n) + s.slice(0, -n);
+  return str.slice(-n) + str.slice(0, -n);
 }
