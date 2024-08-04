@@ -31,7 +31,7 @@ Thumbs.db
 *.tsbuildinfo
 
 # NPM package-lock file (optional)
-package-lock.json
+#package-lock.json
 
 # Yarn lock file (optional, uncomment if you use Yarn)
 # yarn.lock
