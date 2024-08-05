@@ -1,4 +1,5 @@
 import { findMin } from "../src";
+import { people } from "./test-commons";
 
 describe("findMin", () => {
   test("should return undefined for an empty array", () => {
@@ -19,5 +20,10 @@ describe("findMin", () => {
 
   test("should return min item in given double array", () => {
     expect(findMin(["banana", "apple", "cherry", "date"], (a, b) => a.localeCompare(b))).toBe("apple");
+  });
+
+  test("should return person who has min age in given person array", () => {
+    const expected = { age: 25, name: "Bob" };
+    expect(findMin(people, (a, b) => a.age - b.age)).toEqual(expected);
   });
 });
