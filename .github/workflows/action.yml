@@ -30,11 +30,3 @@ jobs:
 
       - name: Run tests
         run: npm test -- --watchAll
-  #pull-request:
-  #runs-on: ubuntu-latest
-  #steps:
-  #- uses: actions/checkout@v3
-  #- name: pull-request
-  #run: |
-  #gh_pr_up() { gh pr create $* || gh pr edit $* }
-  #gh_pr_up --title "My pull request" --body "Description"
