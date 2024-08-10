@@ -1,4 +1,4 @@
-export function packageName(): string {
+function packageName(): string {
   return "commons-ts";
 }
 
@@ -9,7 +9,7 @@ export function packageName(): string {
  * @param str The value to check
  * @returns true/false
  */
-export function isNullOrEmpty(str: string | null | undefined): boolean {
+function isNullOrEmpty(str: string | null | undefined): boolean {
   return str === null || str === undefined || str.trim() === "";
 }
 
@@ -18,7 +18,7 @@ export function isNullOrEmpty(str: string | null | undefined): boolean {
  * @param str The value to reverse
  * @returns string
  */
-export function reverseString(str: string): string {
+function reverseString(str: string): string {
   return str.split("").reverse().join("");
 }
 
@@ -27,7 +27,7 @@ export function reverseString(str: string): string {
  * @param str The value to check
  * @returns true/false
  */
-export function isAlpha(str: string): boolean {
+function isAlpha(str: string): boolean {
   return /^[A-Za-z]+$/.test(str);
 }
 
@@ -36,7 +36,7 @@ export function isAlpha(str: string): boolean {
  * @param str The value to check
  * @returns true/false
  */
-export function isNumeric(str: string): boolean {
+function isNumeric(str: string): boolean {
   return /^[0-9]+$/.test(str);
 }
 
@@ -45,7 +45,7 @@ export function isNumeric(str: string): boolean {
  * @param str The value to check
  * @returns true/false
  */
-export function isWhitespace(str: string): boolean {
+function isWhitespace(str: string): boolean {
   return /^\s*$/.test(str);
 }
 
@@ -55,7 +55,7 @@ export function isWhitespace(str: string): boolean {
  * @param n The rotation count
  * @returns string
  */
-export function rotateStringLeft(str: string, n: number): string {
+function rotateStringLeft(str: string, n: number): string {
   if (str.length === 0) {
     return str;
   }
@@ -75,7 +75,7 @@ export function rotateStringLeft(str: string, n: number): string {
  * @param n The rotation count
  * @returns string
  */
-export function rotateStringRight(str: string, n: number): string {
+function rotateStringRight(str: string, n: number): string {
   if (str.length === 0) {
     return str;
   }
@@ -88,3 +88,14 @@ export function rotateStringRight(str: string, n: number): string {
 
   return str.slice(-n) + str.slice(0, -n);
 }
+
+export {
+  isNullOrEmpty,
+  packageName,
+  reverseString,
+  isAlpha,
+  isNumeric,
+  isWhitespace,
+  rotateStringLeft,
+  rotateStringRight,
+};
