@@ -25,9 +25,9 @@ function compare(x: number, y: number): number {
  * @param {number} defaultValue - The default value to return if the string cannot be converted.
  * @returns {number} The converted integer or the default value.
  */
-function convertStringToNumber(str: string, defaultValue: number = 0): number {
+function toInt(str: string, defaultValue: number = 0): number {
   const num = parseInt(str, 10);
   return isNaN(num) ? defaultValue : num;
 }
 
-export { compare, convertStringToNumber };
+export { compare, toInt };

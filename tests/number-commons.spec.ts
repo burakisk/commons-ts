@@ -1,4 +1,4 @@
-import { compare, convertStringToNumber } from "../src";
+import { compare, toInt } from "../src";
 
 describe("compare", () => {
   test("should return 0 when both numbers are equal", () => {
@@ -23,11 +23,11 @@ describe("compare", () => {
   });
 });
 
-describe("convertStringToNumber", () => {
+describe("toInt", () => {
   test("should convert given string to integer", () => {
-    expect(convertStringToNumber("42")).toBe(42);
-    expect(convertStringToNumber("3.14")).toBe(3);
-    expect(convertStringToNumber("abc")).toBe(0);
-    expect(convertStringToNumber("abc", 10)).toBe(10);
+    expect(toInt("42")).toBe(42);
+    expect(toInt("3.14")).toBe(3);
+    expect(toInt("abc")).toBe(0);
+    expect(toInt("abc", 10)).toBe(10);
   });
 });
