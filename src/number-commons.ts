@@ -18,4 +18,16 @@ function compare(x: number, y: number): number {
   }
 }
 
-export { compare };
+/**
+ * Converts a string to an integer. Returns a default value if the conversion is not possible.
+ *
+ * @param {string} str - The string to convert.
+ * @param {number} defaultValue - The default value to return if the string cannot be converted.
+ * @returns {number} The converted integer or the default value.
+ */
+function convertStringToNumber(str: string, defaultValue: number = 0): number {
+  const num = parseInt(str, 10);
+  return isNaN(num) ? defaultValue : num;
+}
+
+export { compare, convertStringToNumber };
