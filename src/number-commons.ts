@@ -30,4 +30,16 @@ function toInt(str: string, defaultValue: number = 0): number {
   return isNaN(num) ? defaultValue : num;
 }
 
-export { compare, toInt };
+/**
+ * Converts a string to an float. Returns a default value if the conversion is not possible.
+ *
+ * @param {string} str - The string to convert.
+ * @param {number} defaultValue - The default value to return if the string cannot be converted.
+ * @returns {number} The converted float or the default value.
+ */
+function toFloat(str: string, defaultValue: number = 0.0): number {
+  const num = parseFloat(str);
+  return isNaN(num) ? defaultValue : num;
+}
+
+export { compare, toInt, toFloat };

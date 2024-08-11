@@ -1,4 +1,4 @@
-import { compare, toInt } from "../src";
+import { compare, toInt, toFloat } from "../src";
 
 describe("compare", () => {
   test("should return 0 when both numbers are equal", () => {
@@ -29,5 +29,14 @@ describe("toInt", () => {
     expect(toInt("3.14")).toBe(3);
     expect(toInt("abc")).toBe(0);
     expect(toInt("abc", 10)).toBe(10);
+  });
+});
+
+describe("toFloat", () => {
+  test("should convert given string to float", () => {
+    expect(toFloat("42")).toBe(42);
+    expect(toFloat("3.14")).toBe(3.14);
+    expect(toFloat("abc")).toBe(0.0);
+    expect(toFloat("abc", 10.2)).toBe(10.2);
   });
 });
