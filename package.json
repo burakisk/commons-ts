@@ -12,7 +12,9 @@
     "typescript",
     "string utils",
     "integer utils",
-    "data structures"
+    "random utils",
+    "array utils",
+    "io utils"
   ],
   "author": "Burak I",
   "license": "ISC",
