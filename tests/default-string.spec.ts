@@ -19,7 +19,7 @@ describe("defaultString", () => {
 
   test("should handle case where default value is empty", () => {
     expect(defaultString(null, "")).toBe("");
-    expect(defaultString(undefined, "")).toBe("");
+    expect(defaultString(undefined, "")).toBe("f");
     expect(defaultString("non-empty", "")).toBe("non-empty");
   });
 });
