@@ -1,4 +1,4 @@
-import { nextBoolean, nextInt, nextFloat } from "../src";
+import { nextBoolean, nextInt, nextFloat, nextString } from "../src";
 
 describe("nextBoolean", () => {
   test("should be a boolean value", () => {
@@ -54,5 +54,27 @@ describe("nextFloat", () => {
 
     expect(value).toBeGreaterThanOrEqual(min);
     expect(value).toBeLessThanOrEqual(max);
+  });
+});
+
+describe("nextString", () => {
+  test("should generate a string with defult params", () => {
+    const randomString = nextString();
+
+    expect(typeof randomString).toBe("string");
+    expect(randomString.length).toBe(10);
+  });
+
+  test("should generate a string with characters from the charset", () => {
+    const length = 5;
+    const charset = "abc123";
+    const randomString = nextString(length, charset);
+
+    expect(typeof randomString).toBe("string");
+    expect(randomString.length).toBe(length);
+
+    for (const char of randomString) {
+      expect(charset).toContain(char);
+    }
   });
 });
