@@ -3,6 +3,18 @@ function packageName(): string {
 }
 
 /**
+ * Returns the default value if the input string is null or undefined.
+ * Otherwise, returns the input string itself.
+ *
+ * @param {string | null | undefined} input - The input string to check.
+ * @param {string} defaultValue - The value to return if the input is null or undefined.
+ * @returns {string} - The input string if it's not null or undefined; otherwise, the default value.
+ */
+function defaultString(input: string | null | undefined, defaultValue: string): string {
+  return input != null ? input : defaultValue;
+}
+
+/**
  * Checks if the specified value is empty. A value is considered empty if meets any of the following criteria:
  * - Is an empty string
  * - Is ```undefined``` || ```null```
@@ -115,8 +127,42 @@ function rotateStringRight(str: string, n: number): string {
   return str.slice(-n) + str.slice(0, -n);
 }
 
+/**
+ * Counts the number of occurrences of a substring within a larger string, with an optional case-insensitive search.
+ *
+ * @param {string} str - The larger string to search within.
+ * @param {string} subStr - The substring to count occurrences of.
+ * @param {boolean} [ignoreCase=false] - Whether to ignore case when searching for the substring.
+ * @returns {number} - The number of times the substring occurs in the larger string.
+ */
+function countMatches(str: string, subStr: string, ignoreCase: boolean = false): number {
+  if (str == null || subStr == null) {
+    throw new Error("Both the larger string and the substring must be provided.");
+  }
+
+  if (subStr === "") {
+    return 0;
+  }
+
+  if (ignoreCase) {
+    str = str.toLowerCase();
+    subStr = subStr.toLowerCase();
+  }
+
+  let count = 0;
+  let startIndex = 0;
+
+  while ((startIndex = str.indexOf(subStr, startIndex)) !== -1) {
+    count++;
+    startIndex += subStr.length;
+  }
+
+  return count;
+}
+
 export {
   packageName,
+  defaultString,
   isNullOrEmpty,
   areValuesEqual,
   reverseString,
@@ -125,4 +171,5 @@ export {
   isWhitespace,
   rotateStringLeft,
   rotateStringRight,
+  countMatches,
 };
