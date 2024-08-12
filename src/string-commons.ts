@@ -14,6 +14,32 @@ function isNullOrEmpty(str: string | null | undefined): boolean {
 }
 
 /**
+ * Compares two values for equality, with an option to ignore case.
+ * Treats numbers and their string representations as equal.
+ * Handles edge cases such as null, undefined, and non-string inputs.
+ *
+ * @param {any} input1 - The first input to compare.
+ * @param {any} input2 - The second input to compare.
+ * @param {boolean} [ignoreCase=false] - Whether to ignore case when comparing strings.
+ * @returns {boolean} - Returns true if inputs are equal according to the criteria, otherwise false.
+ */
+function areValuesEqual(input1: any, input2: any, ignoreCase: boolean = false): boolean {
+  if (input1 == null || input2 == null) {
+    return false;
+  }
+
+  let str1 = String(input1);
+  let str2 = String(input2);
+
+  if (ignoreCase) {
+    str1 = str1.toLowerCase();
+    str2 = str2.toLowerCase();
+  }
+
+  return str1 === str2;
+}
+
+/**
  * Reverse given string.
  * @param str The value to reverse
  * @returns string
@@ -90,8 +116,9 @@ function rotateStringRight(str: string, n: number): string {
 }
 
 export {
-  isNullOrEmpty,
   packageName,
+  isNullOrEmpty,
+  areValuesEqual,
   reverseString,
   isAlpha,
   isNumeric,
