@@ -52,4 +52,41 @@ function isSameDay(date1: Date, date2: Date): boolean {
   );
 }
 
-export { addDays, addHours, addMilliseconds, isSameDay };
+/**
+ * Formats a UTC timestamp in milliseconds according to a given pattern.
+ * @param millis - The timestamp in milliseconds.
+ * @param pattern - The format pattern (e.g., "yyyy-MM-dd HH:mm:ss").
+ * @returns The formatted date string or undefined if inputs are invalid.
+ */
+function formatUTC(millis: number, pattern: string): string | undefined {
+  if (typeof millis !== "number" || isNaN(millis) || millis < 0) {
+    return undefined;
+  }
+
+  if (typeof pattern !== "string" || pattern.trim() === "") {
+    return undefined;
+  }
+
+  const date = new Date(millis);
+
+  const pad = (num: number, len: number) => String(num).padStart(len, "0");
+
+  const formatMap: { [key: string]: () => string } = {
+    yyyy: () => date.getUTCFullYear().toString(),
+    MM: () => pad(date.getUTCMonth() + 1, 2),
+    dd: () => pad(date.getUTCDate(), 2),
+    HH: () => pad(date.getUTCHours(), 2),
+    mm: () => pad(date.getUTCMinutes(), 2),
+    ss: () => pad(date.getUTCSeconds(), 2),
+    SSS: () => pad(date.getUTCMilliseconds(), 3),
+  };
+
+  const validPattern = /^(yyyy|MM|dd|HH|mm|ss|SSS|[^yMdHmsS \-:\/.,])+$/;
+  if (!validPattern.test(pattern)) {
+    return undefined;
+  }
+
+  return pattern.replace(/yyyy|MM|dd|HH|mm|ss|SSS/g, (match) => formatMap[match]());
+}
+
+export { addDays, addHours, addMilliseconds, isSameDay, formatUTC };
