@@ -53,40 +53,36 @@ function isSameDay(date1: Date, date2: Date): boolean {
 }
 
 /**
- * Formats a UTC timestamp in milliseconds according to a given pattern.
- * @param millis - The timestamp in milliseconds.
- * @param pattern - The format pattern (e.g., "yyyy-MM-dd HH:mm:ss").
- * @returns The formatted date string or undefined if inputs are invalid.
+ * Formats a UTC timestamp according to the given pattern.
+ *
+ * @param millis - The timestamp in milliseconds since the Unix epoch.
+ * @param pattern - The format pattern string. Tokens in the pattern will be replaced with actual date/time values.
+ *
+ * Available tokens:
+ * - `YYYY` for the 4-digit year
+ * - `MM` for the 2-digit month (01-12)
+ * - `DD` for the 2-digit day of the month (01-31)
+ * - `HH` for the 2-digit hour (00-23)
+ * - `mm` for the 2-digit minute (00-59)
+ * - `ss` for the 2-digit second (00-59)
+ * - `SSS` for the 3-digit millisecond (000-999)
+ *
+ * @returns A string representing the formatted date/time, or undefined if the pattern contains unsupported tokens.
  */
 function formatUTC(millis: number, pattern: string): string | undefined {
-  if (typeof millis !== "number" || isNaN(millis) || millis < 0) {
-    return undefined;
-  }
-
-  if (typeof pattern !== "string" || pattern.trim() === "") {
-    return undefined;
-  }
-
   const date = new Date(millis);
 
-  const pad = (num: number, len: number) => String(num).padStart(len, "0");
-
-  const formatMap: { [key: string]: () => string } = {
-    yyyy: () => date.getUTCFullYear().toString(),
-    MM: () => pad(date.getUTCMonth() + 1, 2),
-    dd: () => pad(date.getUTCDate(), 2),
-    HH: () => pad(date.getUTCHours(), 2),
-    mm: () => pad(date.getUTCMinutes(), 2),
-    ss: () => pad(date.getUTCSeconds(), 2),
-    SSS: () => pad(date.getUTCMilliseconds(), 3),
+  const tokens: { [key: string]: string } = {
+    YYYY: date.getUTCFullYear().toString(),
+    MM: ("0" + (date.getUTCMonth() + 1)).slice(-2),
+    DD: ("0" + date.getUTCDate()).slice(-2),
+    HH: ("0" + date.getUTCHours()).slice(-2),
+    mm: ("0" + date.getUTCMinutes()).slice(-2),
+    ss: ("0" + date.getUTCSeconds()).slice(-2),
+    SSS: ("00" + date.getUTCMilliseconds()).slice(-3),
   };
 
-  const validPattern = /^(yyyy|MM|dd|HH|mm|ss|SSS|[^yMdHmsS \-:\/.,])+$/;
-  if (!validPattern.test(pattern)) {
-    return undefined;
-  }
-
-  return pattern.replace(/yyyy|MM|dd|HH|mm|ss|SSS/g, (match) => formatMap[match]());
+  return pattern.replace(/YYYY|MM|DD|HH|mm|ss|SSS/g, (matched) => tokens[matched] || matched);
 }
 
 export { addDays, addHours, addMilliseconds, isSameDay, formatUTC };

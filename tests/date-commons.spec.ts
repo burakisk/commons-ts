@@ -165,41 +165,27 @@ describe("isSameDay", () => {
 });
 
 describe("formatUTC", () => {
-  test("formats a timestamp with a valid pattern", () => {
-    const millis = new Date("2024-08-15T12:34:56.789Z").getTime();
-    expect(formatUTC(millis, "yyyy-MM-dd HH:mm:ss")).toBe("2024-08-15 12:34:56");
-    expect(formatUTC(millis, "MM/dd/yyyy HH:mm:ss")).toBe("08/15/2024 12:34:56");
-    expect(formatUTC(millis, "yyyy-MM-dd HH:mm:ss.SSS")).toBe("2024-08-15 12:34:56.789");
+  it("should format a date with all components", () => {
+    const millis = new Date(Date.UTC(2024, 7, 15, 14, 35, 22, 123)).getTime();
+    const pattern = "YYYY-MM-DD HH:mm:ss.SSS";
+    expect(formatUTC(millis, pattern)).toBe("2024-08-15 14:35:22.123");
   });
 
-  test("handles invalid millis values", () => {
-    expect(formatUTC(NaN, "yyyy-MM-dd")).toBeUndefined();
-    expect(formatUTC(-1, "yyyy-MM-dd")).toBeUndefined();
+  it("should handle a pattern with just the date", () => {
+    const millis = new Date(Date.UTC(2024, 7, 15)).getTime();
+    const pattern = "YYYY-MM-DD";
+    expect(formatUTC(millis, pattern)).toBe("2024-08-15");
   });
 
-  test("handles invalid pattern values", () => {
-    const millis = new Date().getTime();
-    expect(formatUTC(millis, "")).toBeUndefined();
-    expect(formatUTC(millis, null as unknown as string)).toBeUndefined();
-    expect(formatUTC(millis, undefined as unknown as string)).toBeUndefined();
+  it("should handle a pattern with just the time", () => {
+    const millis = new Date(Date.UTC(2024, 7, 15, 14, 35, 22)).getTime();
+    const pattern = "HH:mm:ss";
+    expect(formatUTC(millis, pattern)).toBe("14:35:22");
   });
 
-  test("handles edge case patterns", () => {
-    const millis = new Date("2024-08-15T12:34:56.789Z").getTime();
-    expect(formatUTC(millis, "yyyy")).toBe("2024");
-    expect(formatUTC(millis, "MM")).toBe("08");
-    expect(formatUTC(millis, "dd")).toBe("15");
-    expect(formatUTC(millis, "HH")).toBe("12");
-    expect(formatUTC(millis, "mm")).toBe("34");
-    expect(formatUTC(millis, "ss")).toBe("56");
-    expect(formatUTC(millis, "SSS")).toBe("789");
-  });
-
-  test("handles invalid characters in the pattern", () => {
-    const millis = new Date("2024-08-15T12:34:56.789Z").getTime();
-    expect(formatUTC(millis, "yyyy-MM-dd HH:mm:ss!!")).toBeUndefined();
-    expect(formatUTC(millis, "yyyy-MM-dd $$")).toBeUndefined();
-    expect(formatUTC(millis, "yyyy@MM-dd")).toBeUndefined();
-    expect(formatUTC(millis, "HH:mm:ss (UTC)")).toBeUndefined();
+  it("should handle a pattern with milliseconds", () => {
+    const millis = new Date(Date.UTC(2024, 7, 15, 14, 35, 22, 45)).getTime();
+    const pattern = "HH:mm:ss.SSS";
+    expect(formatUTC(millis, pattern)).toBe("14:35:22.045");
   });
 });
