@@ -1,4 +1,4 @@
-import { validateEmail, validatePhoneNumber } from "../src";
+import { validateEmail, validatePhoneNumber, validateUrl } from "../src";
 
 describe("validateEmail", () => {
   test("returns true for a valid email address", () => {
@@ -43,5 +43,32 @@ describe("validatePhoneNumber", () => {
     expect(validatePhoneNumber("555) 555-5555")).toBe(false); // incorrect parenthesis placement
     expect(validatePhoneNumber("(555 555-5555")).toBe(false); // missing closing parenthesis
     expect(validatePhoneNumber("phone: 555-555-5555")).toBe(false); // non-numeric input
+  });
+});
+
+describe("validateUrl", () => {
+  test("returns true for valid URLs", () => {
+    expect(validateUrl("https://www.google.com")).toBe(true);
+    expect(validateUrl("http://google.com")).toBe(true);
+    expect(validateUrl("https://google.com/path")).toBe(true);
+    expect(validateUrl("http://google.com?query=value")).toBe(true);
+    expect(validateUrl("https://google.com#fragment")).toBe(true);
+    expect(validateUrl("www.google.com")).toBe(true); // without protocol
+    expect(validateUrl("google.com")).toBe(true); // without www and protocol
+  });
+
+  test("returns false for invalid URLs", () => {
+    expect(validateUrl("htp://invalid.com")).toBe(false); // invalid protocol
+    expect(validateUrl("https://")).toBe(false); // missing domain
+    expect(validateUrl("google")).toBe(false); // missing top-level domain
+    expect(validateUrl("google.")).toBe(false); // incomplete domain
+    expect(validateUrl("https://google,com")).toBe(false); // invalid character in domain
+    expect(validateUrl("https://google..com")).toBe(false); // double dots in domain
+  });
+
+  test("returns false for non-URL strings", () => {
+    expect(validateUrl("random text")).toBe(false);
+    expect(validateUrl("12345")).toBe(false);
+    expect(validateUrl("")).toBe(false);
   });
 });
