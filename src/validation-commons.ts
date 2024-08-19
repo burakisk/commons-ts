@@ -58,4 +58,43 @@ function validateUrl(url: string): boolean {
   return urlRegex.test(url);
 }
 
-export { validateEmail, validatePhoneNumber, validateUrl };
+/**
+ * Validates a credit card number using the Luhn algorithm.
+ *
+ * @param cardNumber - The credit card number as a string.
+ * @returns `true` if the card number is valid, `false` otherwise.
+ *
+ * ### Example:
+ * ```typescript
+ * isValidCreditCard('4532015112830366'); // returns true
+ * isValidCreditCard('1234567890123456'); // returns false
+ * ```
+ */
+function isValidCreditCard(cardNumber: string): boolean {
+  const cardNumberPattern = /^\d{13,19}$/;
+  if (!cardNumberPattern.test(cardNumber)) {
+    return false;
+  }
+
+  // Luhn Algorithm implementation
+  let sum = 0;
+  let shouldDouble = false;
+
+  for (let i = cardNumber.length - 1; i >= 0; i--) {
+    let digit = parseInt(cardNumber[i], 10);
+
+    if (shouldDouble) {
+      digit *= 2;
+      if (digit > 9) {
+        digit -= 9;
+      }
+    }
+
+    sum += digit;
+    shouldDouble = !shouldDouble;
+  }
+
+  return sum % 10 === 0;
+}
+
+export { validateEmail, validatePhoneNumber, validateUrl, isValidCreditCard };

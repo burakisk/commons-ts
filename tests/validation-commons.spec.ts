@@ -1,4 +1,4 @@
-import { validateEmail, validatePhoneNumber, validateUrl } from "../src";
+import { validateEmail, validatePhoneNumber, validateUrl, isValidCreditCard } from "../src";
 
 describe("validateEmail", () => {
   test("returns true for a valid email address", () => {
@@ -70,5 +70,27 @@ describe("validateUrl", () => {
     expect(validateUrl("random text")).toBe(false);
     expect(validateUrl("12345")).toBe(false);
     expect(validateUrl("")).toBe(false);
+  });
+});
+
+describe("isValidCreditCard", () => {
+  test("valid credit card numbers should return true", () => {
+    expect(isValidCreditCard("4532015112830366")).toBe(true); // Visa
+    expect(isValidCreditCard("6011514433546201")).toBe(true); // Discover
+    expect(isValidCreditCard("371449635398431")).toBe(true); // American Express
+    expect(isValidCreditCard("378282246310005")).toBe(true); // American Express
+  });
+
+  test("invalid credit card numbers should return false", () => {
+    expect(isValidCreditCard("1234567890123456")).toBe(false); // Random invalid number
+    expect(isValidCreditCard("0000000000000000")).toBe(false); // All zeros
+    expect(isValidCreditCard("453201511283036")).toBe(false); // Incomplete number (12 digits)
+    expect(isValidCreditCard("6011111111111117")).toBe(false); // Invalid Luhn check
+  });
+
+  test("non-numeric input should return false", () => {
+    expect(isValidCreditCard("abcdefg12345678")).toBe(false);
+    expect(isValidCreditCard("4532-0151-1283-0366")).toBe(false);
+    expect(isValidCreditCard("")).toBe(false);
   });
 });
