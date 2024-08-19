@@ -65,14 +65,18 @@ function validateUrl(url: string): boolean {
  * @returns `true` if the card number is valid, `false` otherwise.
  *
  * ### Example:
- * ```typescript
- * isValidCreditCard('4532015112830366'); // returns true
- * isValidCreditCard('1234567890123456'); // returns false
- * ```
+ *
+ * isValidCreditCardNumber('4532015112830366'); // returns true
+ * isValidCreditCardNumber('1234567890123456'); // returns false
+ *
  */
-function isValidCreditCard(cardNumber: string): boolean {
+function isValidCreditCardNumber(cardNumber: string): boolean {
   const cardNumberPattern = /^\d{13,19}$/;
   if (!cardNumberPattern.test(cardNumber)) {
+    return false;
+  }
+
+  if (/^0+$/.test(cardNumber)) {
     return false;
   }
 
@@ -97,4 +101,4 @@ function isValidCreditCard(cardNumber: string): boolean {
   return sum % 10 === 0;
 }
 
-export { validateEmail, validatePhoneNumber, validateUrl, isValidCreditCard };
+export { validateEmail, validatePhoneNumber, validateUrl, isValidCreditCardNumber };
