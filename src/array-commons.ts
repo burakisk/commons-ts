@@ -42,7 +42,7 @@
  * const youngest = findMin(people, (a, b) => a.age - b.age);
  * console.log(youngest); // Output: { name: "Bob", age: 25 }
  */
-export function findMin<T>(arr: T[], compareFn: (a: T, b: T) => number): T | undefined {
+function findMin<T>(arr: T[], compareFn: (a: T, b: T) => number): T | undefined {
   if (arr.length === 0) {
     return undefined;
   }
@@ -94,7 +94,7 @@ export function findMin<T>(arr: T[], compareFn: (a: T, b: T) => number): T | und
  * const oldest = findMax(people, (a, b) => a.age - b.age);
  * console.log(oldest); // Output: { name: "Charlie", age: 35 }
  */
-export function findMax<T>(arr: T[], compareFn: (a: T, b: T) => number): T | undefined {
+function findMax<T>(arr: T[], compareFn: (a: T, b: T) => number): T | undefined {
   if (arr.length === 0) {
     return undefined;
   }
@@ -119,6 +119,8 @@ export function findMax<T>(arr: T[], compareFn: (a: T, b: T) => number): T | und
  * const uniqueStrings = unique(strings);
  * console.log(uniqueStrings); // Output: ["a", "b", "c"]
  */
-export function unique<T>(arr: T[]): T[] {
+function unique<T>(arr: T[]): T[] {
   return [...new Set(arr)];
 }
+
+export { findMin, findMax, unique };

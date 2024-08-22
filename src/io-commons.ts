@@ -5,7 +5,7 @@
  *
  * @example getFileExtension("file.txt");   // txt
  */
-export function getFileExtension(filename: string): string | null {
+function getFileExtension(filename: string): string | null {
   if (filename && filename.includes(".")) {
     const lastDotIndex = filename.lastIndexOf(".");
 
@@ -15,3 +15,5 @@ export function getFileExtension(filename: string): string | null {
   }
   return null;
 }
+
+export { getFileExtension };
