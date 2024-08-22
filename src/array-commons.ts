@@ -101,3 +101,24 @@ export function findMax<T>(arr: T[], compareFn: (a: T, b: T) => number): T | und
 
   return arr.reduce((max, current) => (compareFn(current, max) > 0 ? current : max), arr[0]);
 }
+
+/**
+ * Returns an array with only unique values.
+ *
+ * @template T - The type of elements in the array.
+ * @param {T[]} arr - The input array containing elements of any type.
+ * @returns {T[]} - A new array containing only the unique elements from the input array.
+ *
+ * @example
+ * // Example usage:
+ * const numbers = [1, 2, 2, 3, 4, 4, 5];
+ * const uniqueNumbers = unique(numbers);
+ * console.log(uniqueNumbers); // Output: [1, 2, 3, 4, 5]
+ *
+ * const strings = ["a", "b", "a", "c"];
+ * const uniqueStrings = unique(strings);
+ * console.log(uniqueStrings); // Output: ["a", "b", "c"]
+ */
+export function unique<T>(arr: T[]): T[] {
+  return [...new Set(arr)];
+}
