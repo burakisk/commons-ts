@@ -1,4 +1,4 @@
-import { compare, toInt, toFloat } from "../src";
+import { compare, toInt, toFloat, isEven, isOdd } from "../src";
 
 describe("compare", () => {
   test("should return 0 when both numbers are equal", () => {
@@ -38,5 +38,33 @@ describe("toFloat", () => {
     expect(toFloat("3.14")).toBe(3.14);
     expect(toFloat("abc")).toBe(0.0);
     expect(toFloat("abc", 10.2)).toBe(10.2);
+  });
+});
+
+describe("isEven", () => {
+  it("should return true for even numbers", () => {
+    expect(isEven(2)).toBe(true);
+    expect(isEven(0)).toBe(true);
+    expect(isEven(-4)).toBe(true);
+  });
+
+  it("should return false for odd numbers", () => {
+    expect(isEven(3)).toBe(false);
+    expect(isEven(7)).toBe(false);
+    expect(isEven(-1)).toBe(false);
+  });
+});
+
+describe("isOdd", () => {
+  it("should return true for odd numbers", () => {
+    expect(isOdd(3)).toBe(true);
+    expect(isOdd(7)).toBe(true);
+    expect(isOdd(-1)).toBe(true);
+  });
+
+  it("should return false for even numbers", () => {
+    expect(isOdd(2)).toBe(false);
+    expect(isOdd(0)).toBe(false);
+    expect(isOdd(-4)).toBe(false);
   });
 });

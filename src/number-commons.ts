@@ -42,4 +42,34 @@ function toFloat(str: string, defaultValue: number = 0.0): number {
   return isNaN(num) ? defaultValue : num;
 }
 
-export { compare, toInt, toFloat };
+/**
+ * Checks if a number is even.
+ *
+ * @param {number} num - The number to check.
+ * @returns {boolean} - Returns `true` if the number is even, otherwise `false`.
+ *
+ * @example
+ * // Example usage:
+ * console.log(isEven(4)); // Output: true
+ * console.log(isEven(7)); // Output: false
+ */
+function isEven(num: number): boolean {
+  return num % 2 === 0;
+}
+
+/**
+ * Checks if a number is odd.
+ *
+ * @param {number} num - The number to check.
+ * @returns {boolean} - Returns `true` if the number is odd, otherwise `false`.
+ *
+ * @example
+ * // Example usage:
+ * console.log(isOdd(4)); // Output: false
+ * console.log(isOdd(7)); // Output: true
+ */
+function isOdd(num: number): boolean {
+  return num % 2 !== 0;
+}
+
+export { compare, toInt, toFloat, isEven, isOdd };
